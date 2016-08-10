@@ -30,7 +30,7 @@ public class HomePageActivity extends AppCompatActivity {
     private List<Items> mRowLytList = new ArrayList<>();
     private ProgressDialog mProgressDialog;
     private RecyclerView mHomePageRecycleView;
-    List<HomePageLayout> mHomePageLayout;
+    private List<HomePageLayout> mHomePageLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
