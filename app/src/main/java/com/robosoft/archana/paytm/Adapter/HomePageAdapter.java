@@ -43,8 +43,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.mImgUrlList = mImgUrlList;
         this.mItemsList = mItemsList;
         mProductRecycleViewAdapter = new ProductRecycleViewAdapter(mContext, mItemsList);
-        mCustomAdapter = new CustomPagerAdapter(mContext, mImgUrlList);
-
     }
 
     @Override
@@ -65,11 +63,9 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         switch (holder.getItemViewType()) {
             case CAROUSEL_LAYT:
                 setHeader(mTxtCarouselLytName, position);
-                mCustomAdapter.notifyDataSetChanged();
                 break;
             case ROW_LYT:
                 setHeader(mTxtRowLytName, position);
-                mProductRecycleViewAdapter.notifyDataSetChanged();
                 break;
         }
     }
@@ -87,9 +83,9 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void setViewPager() {
         if (mViewPager != null) {
+            mCustomAdapter = new CustomPagerAdapter(mContext, mImgUrlList);
             mViewPager.setAdapter(mCustomAdapter);
             mViewPager.addOnPageChangeListener(this);
-
         }
     }
 
@@ -107,7 +103,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onPageSelected(int position) {
-
         mViewPager.reMeasureCurrentPage();
     }
 
