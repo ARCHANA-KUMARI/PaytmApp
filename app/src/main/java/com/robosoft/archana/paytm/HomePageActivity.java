@@ -86,7 +86,7 @@ public class HomePageActivity extends AppCompatActivity {
         HomePageAdapter homePageAdapter = new HomePageAdapter(mHomePageLayout, this, mImgUrlList, mRowLytList);
         mHomePageRecycleView.setLayoutManager(ViewUtils.setLinearLayoutManager(LinearLayoutManager.VERTICAL, this));
         mHomePageRecycleView.setAdapter(homePageAdapter);
-        homePageAdapter.notifyDataSetChanged();
+       // homePageAdapter.notifyDataSetChanged();
     }
 
     @Override
