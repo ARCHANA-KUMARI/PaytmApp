@@ -13,6 +13,7 @@
     tools:context="com.robosoft.archana.paytm.HomePageActivity"
     tools:showIn="@layout/activity_home_page">
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/layout_recycler"
