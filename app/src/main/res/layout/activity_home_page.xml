@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/container"
     tools:context="com.robosoft.archana.paytm.HomePageActivity">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,6 +21,13 @@
 
     <include layout="@layout/content_home_page" />
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ok" />
 
 </android.support.design.widget.CoordinatorLayout>
