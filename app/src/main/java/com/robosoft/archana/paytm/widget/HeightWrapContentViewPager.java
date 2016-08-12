@@ -33,8 +33,7 @@ public class HeightWrapContentViewPager extends ViewPager {
     public void reMeasureCurrentPage() {
         //this.requestLayout();
         super.requestLayout();
-
-
     }
+
 }
 

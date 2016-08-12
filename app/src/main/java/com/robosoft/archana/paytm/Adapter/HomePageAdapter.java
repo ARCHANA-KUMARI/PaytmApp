@@ -14,19 +14,19 @@ import com.robosoft.archana.paytm.HomePageActivity;
 import com.robosoft.archana.paytm.R;
 import com.robosoft.archana.paytm.Util.HomePageLayout;
 import com.robosoft.archana.paytm.Util.Items;
-import com.robosoft.archana.paytm.widget.HeightWrapContentViewPager;
 
 import java.util.List;
 
 /**
  * Created by archana on 6/8/16.
  */
-public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ViewPager.OnPageChangeListener {
+public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private List<HomePageLayout> mHolePageLytList;
     private View mOneRow;
-    private HeightWrapContentViewPager mViewPager;
+   // private HeightWrapContentViewPager mViewPager;
+    private ViewPager mViewPager;
     private RecyclerView mProductRecyclerView;
     private List<String> mImgUrlList;
     private List<Items> mItemsList;
@@ -85,7 +85,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (mViewPager != null) {
             mCustomAdapter = new CustomPagerAdapter(mContext, mImgUrlList);
             mViewPager.setAdapter(mCustomAdapter);
-            mViewPager.addOnPageChangeListener(this);
+
         }
     }
 
@@ -96,27 +96,12 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        mViewPager.reMeasureCurrentPage();
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
     class PagerViewHolder extends RecyclerView.ViewHolder {
 
         public PagerViewHolder(View itemView) {
             super(itemView);
             mTxtCarouselLytName = (TextView) itemView.findViewById(R.id.lyt_name);
-            mViewPager = (HeightWrapContentViewPager) itemView.findViewById(R.id.viewpager);
+            mViewPager = (ViewPager) itemView.findViewById(R.id.viewpager);
             mViewPager.setClipToPadding(false);
             mViewPager.setPageMargin(40);
             setViewPager();

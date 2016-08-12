@@ -40,6 +40,7 @@ public class CustomPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         View viewItem = inflater.inflate(R.layout.imgview, container, false);
         final ImageView imageView = (ImageView) viewItem.findViewById(R.id.pagerimg);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         downloadImgFromServer(position, imageView);
         ((ViewPager) container).addView(viewItem);
         viewItem.setTag(position);
