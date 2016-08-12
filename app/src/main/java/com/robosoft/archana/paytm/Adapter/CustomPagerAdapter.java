@@ -7,10 +7,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.robosoft.archana.paytm.Network.NetworkStatus;
 import com.robosoft.archana.paytm.Network.VolleyHelper;
 import com.robosoft.archana.paytm.R;
 
@@ -32,7 +34,10 @@ public class CustomPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mImgList.size();
+        if(mImgList==null)
+             return 0;
+        else
+            return mImgList.size();
     }
 
     @Override
@@ -48,20 +53,26 @@ public class CustomPagerAdapter extends PagerAdapter {
     }
 
     private void downloadImgFromServer(int position, final ImageView imageView) {
-        mImgLoader = VolleyHelper.getInstance(mContext).getImageLoader();
-        mImgLoader.get(mImgList.get(position), new ImageLoader.ImageListener() {
-            @Override
-            public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                if (response.getBitmap() != null) {
-                    imageView.setImageBitmap(response.getBitmap());
-                }
-            }
+        if(NetworkStatus.isNetworkAvailable(mContext)) {
+            if (URLUtil.isValidUrl(mImgList.get(position))) {
+                mImgLoader = VolleyHelper.getInstance(mContext).getImageLoader();
+                mImgLoader.get(mImgList.get(position), new ImageLoader.ImageListener() {
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
+                        if (response.getBitmap() != null) {
+                            imageView.setImageBitmap(response.getBitmap());
+                        }
+                    }
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                imageView.setImageResource(R.drawable.error);
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        imageView.setImageResource(R.drawable.placeholder);
+                    }
+                });
             }
-        });
+        }else {
+            imageView.setImageResource(R.drawable.placeholder);
+        }
     }
 
     @Override

@@ -11,10 +11,7 @@
     android:background="@color/whitecolor"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.robosoft.archana.paytm.HomePageActivity"
-
     tools:showIn="@layout/activity_home_page">
-   <!-- app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-
     <android.support.v7.widget.RecyclerView
         android:layout_below="@id/toolbar"
         android:layout_width="wrap_content"

@@ -5,4 +5,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="header_margin">10dp</dimen>
     <dimen name="margin_top">5dp</dimen>
+    <dimen name="paddingleft">40dp</dimen>
+    <dimen name="discountpadding">50dp</dimen>
+    <dimen name="height">200dp</dimen>
 </resources>

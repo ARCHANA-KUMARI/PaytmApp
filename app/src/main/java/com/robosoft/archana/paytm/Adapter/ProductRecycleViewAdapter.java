@@ -7,11 +7,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.robosoft.archana.paytm.Network.NetworkStatus;
 import com.robosoft.archana.paytm.Network.VolleyHelper;
 import com.robosoft.archana.paytm.R;
 import com.robosoft.archana.paytm.Util.Items;
@@ -55,27 +57,37 @@ public class ProductRecycleViewAdapter extends RecyclerView.Adapter<ProductRecyc
             holder.mTxtOfferPrice.setTypeface(Typeface.DEFAULT_BOLD);
             holder.mTxtOfferPrice.setText(mContext.getResources().getString(R.string.rs_str) + " " + items.offerPrice);
         }
+        downloadImg(holder, items);
+    }
 
-        mImgLoader = VolleyHelper.getInstance(mContext).getImageLoader();
-        mImgLoader.get(items.imageUrl, new ImageLoader.ImageListener() {
-            @Override
-            public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                if (response != null) {
-                    holder.mProductImg.setImageBitmap(response.getBitmap());
-                }
+    private void downloadImg(final ProductViewHolder holder, Items items) {
+        if(NetworkStatus.isNetworkAvailable(mContext)){
+            if (URLUtil.isValidUrl(items.imageUrl)) {
+                mImgLoader = VolleyHelper.getInstance(mContext).getImageLoader();
+                mImgLoader.get(items.imageUrl, new ImageLoader.ImageListener() {
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
+                        if (response != null) {
+                            holder.mProductImg.setImageBitmap(response.getBitmap());
+                        }
+                    }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        holder.mProductImg.setImageResource(R.drawable.placeholder);
+                    }
+                });
             }
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                holder.mProductImg.setImageResource(R.drawable.placeholder);
-            }
-        });
-
+        }else {
+            holder.mProductImg.setImageResource(R.drawable.placeholder);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mItemList.size();
+        if(mItemList==null)
+             return 0;
+        else
+            return mItemList.size();
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder {

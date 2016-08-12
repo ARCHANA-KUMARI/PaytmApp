@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 
 import com.android.volley.Response;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private String url = "https://dl.dropboxusercontent.com/s/u1rnvb8oow2xs5c/homepage.json?dl=0";
+    private String mUrl = "https://dl.dropboxusercontent.com/s/u1rnvb8oow2xs5c/homepage.json?dl=0";
     private ImageView mImgErrorMsg;
     private List<String> mImgUrlList = new ArrayList<>();
     private List<Items> mRowLytList = new ArrayList<>();
@@ -58,8 +59,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
     private void downloadServerData() {
         if(NetworkStatus.isNetworkAvailable(this)) {
+            if(URLUtil.isValidUrl(mUrl)){
             ViewUtils.showProgressDialog(mProgressDialog);
-            DownloadManager.downloadData(this, url, new Response.Listener<HomePage>() {
+            DownloadManager.downloadData(this, mUrl, new Response.Listener<HomePage>() {
                 @Override
                 public void onResponse(HomePage response) {
                     ViewUtils.dismissProgressDialog(mProgressDialog);
@@ -90,6 +92,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             });
 
         }
+        }
         else {
             mFloatBtn.setVisibility(View.VISIBLE);
             setSnackBar();
@@ -108,7 +111,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     protected void onStop() {
         super.onStop();
         ViewUtils.dismissProgressDialog(mProgressDialog);
-        VolleyHelper.getInstance(this).cancelRequest(url);
+        VolleyHelper.getInstance(this).cancelRequest(mUrl);
 
     }
     private void setSnackBar() {
@@ -118,7 +121,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(View v) {
                         if (NetworkStatus.isNetworkAvailable(getApplicationContext())) {
                             downloadServerData();
-
                         }
                     }
                 }).show();

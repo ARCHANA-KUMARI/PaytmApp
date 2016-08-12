@@ -66,6 +66,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 break;
             case ROW_LYT:
                 setHeader(mTxtRowLytName, position);
+                mProductRecycleViewAdapter.notifyDataSetChanged();
                 break;
         }
     }
@@ -77,7 +78,9 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return mHolePageLytList.size();
+        if(mHolePageLytList==null)
+             return 0;
+        else return mHolePageLytList.size();
     }
 
 
