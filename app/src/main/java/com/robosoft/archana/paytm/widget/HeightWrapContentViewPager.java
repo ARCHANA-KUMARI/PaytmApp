@@ -20,7 +20,7 @@ public class HeightWrapContentViewPager extends ViewPager {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        View child = (View) this.findViewWithTag(this.getCurrentItem());//imgView i.e child of viewPager
+        View child = (View) this.findViewWithTag(this.getCurrentItem());//linearlayout i.e child of viewPager
         if (child != null) {
             child.measure(widthMeasureSpec, View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
             int height = child.getMeasuredHeight();
@@ -31,8 +31,11 @@ public class HeightWrapContentViewPager extends ViewPager {
     }
 
     public void reMeasureCurrentPage() {
-        //this.requestLayout();
-        super.requestLayout();
+        if(!isInLayout()){
+            //this.requestLayout();
+            super.requestLayout();
+        }
+
     }
 
 }

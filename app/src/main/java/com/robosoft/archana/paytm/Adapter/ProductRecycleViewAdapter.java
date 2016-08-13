@@ -1,6 +1,7 @@
 package com.robosoft.archana.paytm.Adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -52,6 +53,7 @@ public class ProductRecycleViewAdapter extends RecyclerView.Adapter<ProductRecyc
         }
         if (!TextUtils.isEmpty(items.actualPrice)) {
             holder.mTxtActualPrice.setText(mContext.getResources().getString(R.string.rs_str) + " " + items.actualPrice);
+            holder.mTxtActualPrice.setPaintFlags(holder.mTxtActualPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         if (!TextUtils.isEmpty(items.offerPrice)) {
             holder.mTxtOfferPrice.setTypeface(Typeface.DEFAULT_BOLD);
