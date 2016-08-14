@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.robosoft.archana.paytm.HomePageActivity;
 import com.robosoft.archana.paytm.R;
 import com.robosoft.archana.paytm.Util.HomePageLayout;
 import com.robosoft.archana.paytm.Util.Items;
+import com.robosoft.archana.paytm.Util.ViewUtils;
 
 import java.util.List;
 
@@ -106,6 +108,10 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             mTxtCarouselLytName = (TextView) itemView.findViewById(R.id.lyt_name);
             mViewPager = (ViewPager) itemView.findViewById(R.id.viewpager);
+            ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
+            int gridUnit = ViewUtils.getScreenWidth((Activity) mContext);
+            params.height = (int) ((double) gridUnit / CAROUSEL_ASP_RATIO_SELLERSTORE);
+            params.width  = gridUnit;
             mViewPager.setClipToPadding(false);
             mViewPager.setPageMargin(PAGE_MARGIN);
             setViewPager();
