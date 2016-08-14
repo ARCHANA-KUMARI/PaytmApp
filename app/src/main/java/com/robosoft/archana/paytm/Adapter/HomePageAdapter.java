@@ -35,7 +35,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final int CAROUSEL_LAYT = 2;
     private int inflateLytType;
     private CustomPagerAdapter mCustomAdapter;
-    ProductRecycleViewAdapter mProductRecycleViewAdapter;
+    private final int PAGE_MARGIN = 40;
+    private ProductRecycleViewAdapter mProductRecycleViewAdapter;
 
     public HomePageAdapter(List<HomePageLayout> mHolePageLytList, HomePageActivity mContext, List<String> mImgUrlList, List<Items> mItemsList) {
         this.mHolePageLytList = mHolePageLytList;
@@ -106,7 +107,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mTxtCarouselLytName = (TextView) itemView.findViewById(R.id.lyt_name);
             mViewPager = (ViewPager) itemView.findViewById(R.id.viewpager);
             mViewPager.setClipToPadding(false);
-            mViewPager.setPageMargin(40);
+            mViewPager.setPageMargin(PAGE_MARGIN);
             setViewPager();
 
         }
