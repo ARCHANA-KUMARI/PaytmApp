@@ -26,7 +26,6 @@ public class HeightWrapContentViewPager extends ViewPager {
             int height = child.getMeasuredHeight();
             heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY);
         }
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
