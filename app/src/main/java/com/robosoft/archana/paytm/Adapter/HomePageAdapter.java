@@ -1,11 +1,11 @@
 package com.robosoft.archana.paytm.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +39,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private CustomPagerAdapter mCustomAdapter;
     private final int PAGE_MARGIN = 40;
     private ProductRecycleViewAdapter mProductRecycleViewAdapter;
+    private final double  CAROUSEL_ASP_RATIO_SELLERSTORE  = 2.5;
 
     public HomePageAdapter(List<HomePageLayout> mHolePageLytList, HomePageActivity mContext, List<String> mImgUrlList, List<Items> mItemsList) {
         this.mHolePageLytList = mHolePageLytList;
@@ -108,12 +109,12 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             mTxtCarouselLytName = (TextView) itemView.findViewById(R.id.lyt_name);
             mViewPager = (ViewPager) itemView.findViewById(R.id.viewpager);
-            ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
-            int gridUnit = ViewUtils.getScreenWidth((Activity) mContext);
-            params.height = (int) ((double) gridUnit / CAROUSEL_ASP_RATIO_SELLERSTORE);
-            params.width  = gridUnit;
             mViewPager.setClipToPadding(false);
             mViewPager.setPageMargin(PAGE_MARGIN);
+            ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
+            int screenWidth = ViewUtils.getScreenWidth((Activity) mContext);
+            params.height = (int) ((double) screenWidth / CAROUSEL_ASP_RATIO_SELLERSTORE);
+            params.width  = screenWidth;
             setViewPager();
 
         }
